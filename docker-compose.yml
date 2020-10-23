@@ -1,0 +1,34 @@
+version: '3'
+services:
+  php-fpm:
+    image: "php:7.4-fpm"
+    volumes:
+      - ./src:/var/www/html
+    networks:
+      - web_nw
+  kannel:
+    image: "bulktrade/kannel:r5159"
+    volumes:
+      - ./conf/kannel:/etc/kannel
+      - ./logs/kannel:/var/log/kannel
+    networks:
+      - knl_nw
+      - web_nw
+  nginx:
+    image: "nginx:latest"
+    ports:
+      - 8088:80
+    volumes:
+      - ./src:/var/www/html
+      - ./conf/nginx:/etc/nginx/conf.d
+      - ./logs/nginx:/var/log/nginx
+    networks:
+      - web_nw
+      - knl_nw
+    depends_on: 
+      - php-fpm
+networks:
+  web_nw:
+    driver: bridge
+  knl_nw:
+    driver: bridge
