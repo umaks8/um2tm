@@ -45,6 +45,9 @@ http://host:8088/status/?username=admin&password=password
 ## Логи
 Логи _nginx_ и _kannel_  персистентно пишутся в файлы на хосте:
 
-> ./logs/nginx/
+_./logs/nginx/_
 
-> ./logs/kannel/
+_./logs/kannel/_
+
+
+
